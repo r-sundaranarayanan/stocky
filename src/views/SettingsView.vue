@@ -71,7 +71,7 @@ async function onLogout() {
     <BaseButton variant="danger" :is-loading="logoutAction.isPending.value" @click="onLogout">
       Log out
     </BaseButton>
-  </div>
+ 
 </template>
 
 <style scoped>
