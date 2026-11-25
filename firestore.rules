@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    function nonNegNumber(v) {
+      return v is number && v >= 0;
+    }
+    function validNutrition(d) {
+      return nonNegNumber(d.calories) && d.calories <= 100000
+        && nonNegNumber(d.protein) && nonNegNumber(d.carbs) && nonNegNumber(d.fat);
+    }
+
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.calorieGoal is number
+        && request.resource.data.calorieGoal >= 0;
+      allow delete: if false;
+
+      match /foods/{foodId} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.name is string
+          && request.resource.data.name.size() > 0
+          && request.resource.data.name.size() <= 100
+          && request.resource.data.servingSize is number
+          && request.resource.data.servingSize > 0
+          && validNutrition(request.resource.data);
+      }
+
+      match /entries/{entryId} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.meal in ['breakfast', 'lunch', 'dinner', 'snack']
+          && request.resource.data.date is string
+          && request.resource.data.servings is number
+          && request.resource.data.servings > 0
+          && validNutrition(request.resource.data);
+      }
+    }
+  }
+}

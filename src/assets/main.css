@@ -1,35 +1,107 @@
-@import './base.css';
+:root {
+  --color-bg: #f4f6f5;
+  --color-surface: #ffffff;
+  --color-text: #1f2a26;
+  --color-text-muted: #66736d;
+  --color-border: #dfe5e2;
+  --color-primary: #0f9d6b;
+  --color-primary-dark: #0b7a52;
+  --color-primary-soft: #e3f5ed;
+  --color-danger: #d23b3b;
+  --color-danger-soft: #fdecec;
+  --color-overlay: rgba(0, 0, 0, 0.45);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --font-sm: 0.85rem;
+  --font-md: 1rem;
+  --font-lg: 1.25rem;
+  --font-xl: 1.6rem;
+
+  --tap-size: 44px;
+  --tabbar-height: 60px;
+  --logbar-height: 60px;
+  --content-max-width: 480px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121715;
+    --color-surface: #1b2220;
+    --color-text: #e8efec;
+    --color-text-muted: #9aa8a1;
+    --color-border: #2c3733;
+    --color-primary: #2fc08c;
+    --color-primary-dark: #26a177;
+    --color-primary-soft: #1d3a30;
+    --color-danger: #ff6b6b;
+    --color-danger-soft: #3b2222;
+    --shadow: none;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: var(--font-md);
+  line-height: 1.4;
+  -webkit-tap-highlight-color: transparent;
+}
 
 #app {
-  max-width: 1280px;
+  max-width: var(--content-max-width);
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+  background: var(--color-bg);
 }
 
-a,
-.green {
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-primary);
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+button {
+  cursor: pointer;
 }
