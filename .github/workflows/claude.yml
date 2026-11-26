@@ -47,5 +47,5 @@ jobs:
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
           claude_args: |
-            --allowedTools "Edit,MultiEdit,Write,ToolSearch,Bash(git status:*),Bash(git diff:*),Bash(git log:*),mcp__github_comment__update_claude_comment"
+            --allowedTools "Edit,ToolSearch,mcp__github_comment__update_claude_comment,Bash(/home/runner/work/_actions/anthropics/claude-code-action/v1/scripts/git-add.sh:*),Bash(/home/runner/work/_actions/anthropics/claude-code-action/v1/scripts/git-commit.sh:*),Bash(/home/runner/work/_actions/anthropics/claude-code-action/v1/scripts/git-push.sh:*)"
 
