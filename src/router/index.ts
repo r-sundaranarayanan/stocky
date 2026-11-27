@@ -47,7 +47,7 @@ const router = createRouter({
       meta: { requiresAuth: true, showTabs: true },
     },
     {
-      path: '/log',
+      path: '/log-food',
       name: 'log-food',
       component: () => import('@/views/LogFoodView.vue'),
       meta: { requiresAuth: true },

@@ -74,7 +74,7 @@ describe('router guard', () => {
     it('sends protected pages to the login page', async () => {
       expect((await visit('/', null)).name).toBe('login')
       expect((await visit('/foods', null)).name).toBe('login')
-      expect((await visit('/log', null)).name).toBe('login')
+      expect((await visit('/log-food', null)).name).toBe('login')
       expect((await visit('/onboarding', null)).name).toBe('login')
     })
 
@@ -89,6 +89,7 @@ describe('router guard', () => {
     it('opens protected pages', async () => {
       expect((await visit('/', alice)).name).toBe('diary')
       expect((await visit('/foods', alice)).name).toBe('foods')
+      expect((await visit('/log-food', alice)).name).toBe('log-food')
       expect((await visit('/settings', alice)).name).toBe('settings')
     })
 
@@ -114,7 +115,7 @@ describe('router guard', () => {
     it('redirects every protected page to onboarding', async () => {
       expect((await visit('/', alice)).name).toBe('onboarding')
       expect((await visit('/foods', alice)).name).toBe('onboarding')
-      expect((await visit('/log', alice)).name).toBe('onboarding')
+      expect((await visit('/log-food', alice)).name).toBe('onboarding')
       expect((await visit('/settings', alice)).name).toBe('onboarding')
     })
 
