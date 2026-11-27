@@ -1,17 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useSettingsStore } from '@/stores/settings'
+import { useThemeStore } from '@/stores/theme'
+import type { ThemePreference } from '@/types'
 import { useAsyncAction } from '@/composables/useAsyncAction'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseInput from '@/components/base/BaseInput.vue'
+import BaseSelect from '@/components/base/BaseSelect.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 
 const auth = useAuthStore()
 const settings = useSettingsStore()
+const themeStore = useThemeStore()
 const router = useRouter()
+const themeOptions = [
+  { value: 'system', label: 'System default' },
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
+]
+const themeModel = computed({
+  get: () => themeStore.theme,
+  set: (value: string) => themeStore.setTheme(value as ThemePreference),
+})
 const saveAction = useAsyncAction()
 const logoutAction = useAsyncAction()
 
@@ -64,6 +77,9 @@ async function onLogout() {
       <BaseAlert v-if="isSaved" variant="success">Goal saved.</BaseAlert>
       <BaseButton type="submit" :is-loading="saveAction.isPending.value">Save goal</BaseButton>
     </form>
+    <div class="card">
+      <BaseSelect v-model="themeModel" label="Appearance" :options="themeOptions" />
+    </div>
     <BaseButton variant="secondary" @click="router.push({ name: 'onboarding' })">
       Recalculate goal from my details
     </BaseButton>

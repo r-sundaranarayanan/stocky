@@ -23,3 +23,5 @@ export function defaultMealForNow(now = new Date()): Meal {
   if (hour < 17) return 'snack'
   return 'dinner'
 }
+
+export const THEME_STORAGE_KEY = 'stocky-theme'

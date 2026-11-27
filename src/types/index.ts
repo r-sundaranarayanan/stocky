@@ -57,3 +57,5 @@ export interface UserProfile {
   /** Chosen weekly change in lb: negative to lose, positive to gain, 0 to maintain. */
   weeklyChangeLb: number | null
 }
+
+export type ThemePreference = 'system' | 'light' | 'dark'
